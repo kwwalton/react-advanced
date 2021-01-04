@@ -1,3 +1,5 @@
+Note: Used node version 12.13.0
+From Mosh's React course, 'Advanced Topics' section with features from React 16.8
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

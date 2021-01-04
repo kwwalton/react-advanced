@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Movie from './hoc/Movie'
+import Counter from './hooks/counter'
+import Users from './hooks/users'
+import MoviePage from './context/moviePage'
+import UserContext from './context/userContext'
+import Login from './context/login'
+import CartContext from './context/cartContext'
+import './App.css'
+
+class App extends Component {
+  handleLoggedIn = username => {
+    console.log('Getting the user: ' + username)
+    const user = { name: 'Kenny' }
+    this.setState({ currentUser: user })
+  }
+  state = { currentUser: { name: null } }
+
+  render() {
+    return (
+      <Fragment>
+        <Movie id="123" />
+        <Counter />
+        <Users />
+        <CartContext.Provider value={{ cart: [] }}>
+          <UserContext.Provider
+            value={{
+              currentUser: this.state.currentUser,
+              onLoggedIn: this.handleLoggedIn,
+            }}
+          >
+            <MoviePage />
+            <Login />
+          </UserContext.Provider>
+        </CartContext.Provider>
+      </Fragment>
+    )
+  }
 }
 
-export default App;
+export default App
